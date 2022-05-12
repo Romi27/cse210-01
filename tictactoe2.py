@@ -1,49 +1,44 @@
-import time
 board = ["-", "-", "-",
-        "-", "-", "-",
-        "-", "-", "-"]
+           "-", "-", "-",
+           "-", "-", "-"]
 winner = None
 
 
 def play():
-    
-
     global winner
-    print("start the game!")
+    print("Start the game!")
     see_board()
-
-    for i in range(4):
-        print(" player's turn 1-x")
-        Value = "X"
-        game(Value)
-        win()
+    for i in range(5):
+        print("player 1 turn - X")
+        value = "X"
+        #empiezan a jugar - Jugador1
+        match(value)
+        winner_is()
         if winner != "X" and i < 4:
             for j in range(3):
-                print("player's turn 2 -O")
-                Value = "O"
-                game(Value)
-                win()
-
+                print("player 2 turn - O")
+                value = "O"
+                match(value)
+                winner_is()
                 if winner == "O":
-                    print("CONGRATULATION!!! PAYER 2 WINNER OF TIC TAC TOE")
+                    print("Congratulations!!! Player 2 WINNER of TICTACTOE")
                 break
         elif winner == "X":
-            print("CONGRATULATION!!! PAYER 1 WINNER OF TIC TAC TOE")
+            print("Congratulations!!! Player 2 WINNER of TICTACTOE")
             break
         else:
-            print("YOU TIED THE GAME")
-            break
+            print("You tied the TICTACTOE")
 
 
-def win():
-    global Winner
-    controlline()
-    controlvertical()
-    controldiagonal()
+def winner_is():
+    global winner
+    line_control()
+    Verticalcontrol()
+    Diagonalcontrol()
 
 
-def controlline():
-    global Winner
+def line_control():
+    global winner
     if board[0] == board[1] == board[2] != "-":
         winner = board[0]
     elif board[3] == board[4] == board[5] != "-":
@@ -52,9 +47,9 @@ def controlline():
         winner = board[6]
 
 
-def controlvertical():
-    global Winner
-    if board[0] == board[1] == board[2] != "-":
+def Verticalcontrol():
+    global winner
+    if board[0] == board[3] == board[6] != "-":
         winner = board[0]
     elif board[1] == board[4] == board[7] != "-":
         winner = board[1]
@@ -62,35 +57,39 @@ def controlvertical():
         winner = board[2]
 
 
-def controldiagonal():
-    global Winner
-
+def Diagonalcontrol():
+    global winner
     if board[0] == board[4] == board[8] != "-":
         winner = board[0]
     elif board[2] == board[4] == board[6] != "-":
-        winner = board[4]
+        winner = board[2]
 
 
-def game(Value):
+def match(value):
     point = False
     while point == False:
-        position = int(input("choose a position from 1 to 9:  "))
-        position += 1
-
-        if board(position) == "-":
+        posision = int(input("choose a posicion from 1 to 9: "))
+        posision -= 1
+        if board[posision] == "-":
             point = True
         else:
-            print(" The position is occupied")
-
-    board[position] = Value
+            print("THE POSISION IS OCCUPIED")
+    board[posision] = value
+    see_board()
 
 
 def see_board():
+    print("\n")
+    print(board[0] + " | " + board[1] +
+          " | " + board[2] + "       1 | 2 | 3")
+    print(board[3] + " | " + board[4] +
+          " | " + board[5] + "       4 | 5 | 6")
+    print(board[6] + " | " + board[7] +
+          " | " + board[8] + "       7 | 8 | 9")
+    print("\n")
 
-    print(board[0]+"|" + board[1]+"|" + board[2])
-    print(board[3]+"|" + board[4]+"|" + board[5])
-    print(board[6]+"|" + board[7]+"|" + board[8])
 
-    print(see_board())
+play()
+
 
 
